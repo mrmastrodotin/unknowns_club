@@ -1,0 +1,70 @@
+body {
+  background-color: #0d0d0d;
+  color: #e0e0e0;
+  font-family: 'Courier New', Courier, monospace;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+#output {
+  padding: 20px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-width: 800px;
+  margin: auto;
+}
+
+#cli-input {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  color: #00ffcc;
+  border: none;
+  border-top: 2px solid #00ffcc;
+  outline: none;
+}
+
+.logo {
+  color: #00ffcc;
+  font-weight: bold;
+  white-space: pre;
+  line-height: 1.2;
+}
+
+.prompt {
+  color: #00ffcc;
+  font-weight: bold;
+}
+
+.description {
+  color: #cccccc;
+  font-style: italic;
+}
+
+.question {
+  color: #ffcc00;
+  font-weight: bold;
+}
+
+.answer {
+  color: #66ff66;
+}
+
+.error {
+  color: #ff4444;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+  #output {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  #cli-input {
+    font-size: 14px;
+  }
+}
