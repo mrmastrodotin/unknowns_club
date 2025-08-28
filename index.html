@@ -3,15 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Unknown's Club CLI</title>
+  <title>Kali Linux Terminal - Unknown's Club</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Import Ubuntu Mono font (Kali's default) -->
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div id="terminal">
-    <pre id="output"></pre>
-    <div id="cursor" class="blink">█</div>
-    <input type="text" id="cli-input" autocomplete="off" autofocus />
+  <div id="terminal" role="region" aria-label="Kali Linux Terminal">
+    <section id="output" aria-live="polite"></section>
+    <div id="input-line" style="display: none;">
+      <span id="prompt" class="prompt">unknowns*club:~#</span>
+      <textarea
+        id="cli-input"
+        autocomplete="off"
+        spellcheck="false"
+        wrap="soft"
+        rows="1"
+        aria-label="Terminal input"
+        autofocus
+      ></textarea>
+    </div>
   </div>
+  
   <script src="script.js"></script>
 </body>
 </html>
+
