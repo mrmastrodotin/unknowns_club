@@ -1,70 +1,211 @@
-body {
-  background-color: #0d0d0d;
-  color: #e0e0e0;
-  font-family: 'Courier New', Courier, monospace;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
+/* Import Ubuntu Mono font (Kali's default) */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap');
+
+:root {
+  /* Colors */
+  --bg-color: #000000;
+  --text-color: #f8f8f2;
+  --green: #50fa7b;
+  --red: #ff5555;
+  --comment: #6272a4;
+  --cyan: #8be9fd;
+  --yellow: #f1fa8c;
+  --selection-bg: #44475a;
+  --scrollbar-track: #44475a;
+  --scrollbar-thumb: #6272a4;
+  --scrollbar-thumb-hover: #50fa7b;
+
+  /* Typography */
+  --font-main: 'Ubuntu Mono', 'Courier New', monospace;
+  --font-size-base: 14px;
+  --line-height-base: 1.3;
 }
 
-#output {
-  padding: 20px;
+/* Reset and general body - Kali Linux style */
+body {
+  background-color: var(--bg-color); /* Kali's dark background */
+  color: var(--text-color);
+  font-family: var(--font-main); /* Kali uses Ubuntu Mono */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal body scroll */
+}
+
+/* Terminal container - Full width like real terminal */
+#terminal {
+  width: 100%;
+  min-height: 100vh;
+  padding: 10px 20px;
+  margin: 0;
+  background-color: var(--bg-color);
+}
+
+/* Shared terminal text styles */
+#output, #cli-input, #prompt {
+  font-family: var(--font-main);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
   white-space: pre-wrap;
   word-wrap: break-word;
-  max-width: 800px;
-  margin: auto;
 }
 
 #cli-input {
-  width: 100%;
-  padding: 12px 20px;
-  font-size: 16px;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  color: #00ffcc;
+  background: transparent;
   border: none;
-  border-top: 2px solid #00ffcc;
+  color: #f8f8f2;
+  font-family: 'Ubuntu Mono', monospace;
   outline: none;
+  padding: 0;
+  margin: 0 0 0 4px;
+  caret-color: #f8f8f2;
+  resize: none;
+  overflow: hidden; /* Hide scrollbars */
+  word-wrap: break-word; /* Allow word wrapping */
+  min-height: 18px; /* Minimum single line height */
+  flex-grow: 1;
 }
 
+/* Remove blinking cursor since we're using native caret */
+#cursor {
+  display: none;
+}
+
+/* Input line container - Kali style with baseline alignment */
+#input-line {
+  display: flex;
+  align-items: flex-start; /* Align to top for multi-line */
+  margin-top: 2px;
+}
+
+#prompt {
+  font-weight: normal;
+  user-select: none;
+  white-space: pre-line; /* Allows <br> to work properly */
+  color: var(--green); /* Kali green for prompt */
+}
+
+/* Kali Linux authentic color scheme */
 .logo {
-  color: #00ffcc;
+  color: var(--red); /* Kali red for logo */
   font-weight: bold;
   white-space: pre;
-  line-height: 1.2;
+  line-height: var(--line-height-base);
 }
 
 .prompt {
-  color: #00ffcc;
-  font-weight: bold;
+  color: var(--green); /* Kali green */
+  font-weight: normal;
 }
 
 .description {
-  color: #cccccc;
+  color: var(--comment); /* Kali comment color */
   font-style: italic;
 }
 
 .question {
-  color: #ffcc00;
-  font-weight: bold;
+  color: var(--cyan); /* Kali cyan */
+  font-weight: normal;
 }
 
 .answer {
-  color: #66ff66;
+  color: var(--yellow); /* Kali yellow */
 }
 
 .error {
-  color: #ff4444;
+  color: var(--red); /* Kali red */
   font-weight: bold;
 }
 
-@media screen and (max-width: 600px) {
-  #output {
-    padding: 10px;
-    font-size: 14px;
-  }
+.success {
+  color: var(--green); /* Kali green */
+}
 
+/* Kali Linux scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #6272a4 #44475a;
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+/* Selection styling to match Kali */
+::selection {
+  background-color: var(--selection-bg);
+  color: var(--text-color);
+}
+
+/* Responsive tweaks for small screens - Kali style */
+@media screen and (max-width: 600px) {
+  #terminal {
+    padding: 5px 10px;
+  }
+  
+  #output, #cli-input, #prompt {
+    font-size: 12px;
+  }
+}
+
+/* Additional mobile optimization */
+@media screen and (max-width: 480px) {
+  #terminal {
+    padding: 5px;
+  }
+  
+  #output, #cli-input, #prompt {
+    font-size: 11px;
+  }
+}
+
+/* Focus states for accessibility */
+#cli-input:focus {
+  outline: none;
+  background-color: rgba(80, 250, 123, 0.05);
+}
+
+/* Terminal window decoration (optional) */
+#terminal::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--green), var(--cyan), #ff79c6); /* Note: #ff79c6 is not in the palette */
+  margin-bottom: 10px;
+}
+
+/* Authentic terminal text rendering */
+#output, #cli-input, #prompt {
+  font-feature-settings: "liga" 0, "kern" 1;
+  text-rendering: optimizeSpeed;
+  font-variant-ligatures: none;
+}
+
+/* Hide default input styling on mobile */
+#cli-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+}
+
+/* Prevent zoom on mobile */
+@media screen and (max-device-width: 767px) {
   #cli-input {
-    font-size: 14px;
+    font-size: 16px; /* Prevent zoom on iOS */
   }
 }
